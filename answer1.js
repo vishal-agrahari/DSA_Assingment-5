@@ -1,19 +1,22 @@
 function convertTo2DArray(original, m, n) {
-  const totalElements = m * n;
-  
-  if (original.length !== totalElements) {
-    return [];
+  if (original.length !== m * n) {
+    return []; // Return an empty 2D array if it's impossible to form m x n array.
   }
 
-  const result = [];
+  // Initialize an empty 2D array with m rows and n columns.
+  const result = Array.from({ length: m }, () => Array(n));
+
+  // Fill in the elements from the original array into the 2D array row-wise.
   for (let i = 0; i < m; i++) {
-    const row = original.slice(i * n, (i + 1) * n);
-    result.push(row);
+    result[i] = original.slice(i * n, (i + 1) * n);
   }
 
   return result;
 }
 
-// Test example
-const originalArray = [1, 2, 3, 4, 5, 6]; // Example 1D array
-const m = 2; // Number of rows
+// Test case
+const original = [1, 2, 3, 4];
+const m = 2;
+const n = 2;
+const output = convertTo2DArray(original, m, n);
+console.log(output); // Output: [[1, 2], [3, 4]]
